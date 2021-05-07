@@ -26,7 +26,7 @@ SECRET_KEY = 'x*e_eo98z7w4&jb53f(+8muim@#y@r57e!ue8)zcd9@-+7ky%w'
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
-AUTH_USER_MODEL = "accounts.CustomUser"
+AUTH_USER_MODEL = "accounts.User"
 
 
 # Application definition
@@ -38,8 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    "graphene_django",
     'rest_framework',
-    'core',
     'accounts',
 ]
 
