@@ -4,7 +4,7 @@ from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, BaseU
 # Create your models here.
 
 class UserManager(BaseUserManager):
-  def create_user(self, email, username, password=None, **extra_fields):
+  def create_user(self, username, password=None, **extra_fields):
     #if not email:
      # raise ValueErorr("Email field is required")
     if not username:
@@ -32,19 +32,27 @@ class UserManager(BaseUserManager):
 
 class User(AbstractBaseUser,PermissionsMixin):
   email = models.EmailField(unique=True)
-  name = models.CharField(max_length=255)
-
+  First_name = models.CharField(max_length=30,default='unknown')
+  Last_name = models.CharField(max_length=30,default='user')
+  birth = models.DateField()
+  age = models.IntegerField(default=0)
+  created_at = models.DateField(auto_now_add=True,null=True)
+  #job = models.CharField()
   username = models.CharField(unique=True,max_length=100)
   is_staff = models.BooleanField(default=False)
   is_superuser = models.BooleanField(default=False)
   is_active = models.BooleanField(default=True)
+  is_medical = models.BooleanField(default=False)
   
   USERNAME_FIELD = "username"
-  REQUIRED_FIELD = ['email','is_superuser' ]
+  REQUIRED_FIELD = ['First_name','Last_name','is_medical','email','is_superuser' ]
   
   objects = UserManager()
   
   def __str__(self):
     return self.username
     
+  def full_name(self):
+    full_name = self.First_name+ ' ' + self.Last_name
+    return full_name
 

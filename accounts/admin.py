@@ -12,7 +12,7 @@ class UserCreationForm(forms.ModelForm):
   password2 = forms.CharField(label='password Confirmation', widget=forms.PasswordInput)
   class Meta:
     model = User
-    fields = ('email',)
+    fields = ('email','username',)
     
   def save(self, commit=True):
     user= super().save(commit=False)
@@ -36,19 +36,19 @@ class UserChanegeForm(forms.ModelForm):
 class UserAdmin(BaseUserAdmin):
   form = UserChanegeForm
   add_form = UserCreationForm 
-  list_display = ('email', 'name', 'username', 'is_staff')
+  list_display = ( 'full_name', 'username','email')
   list_filter = ['is_staff',]
   fieldsets = (
-    (None, {'fields':('email','password')}),
-      ('Personal Information',{'fields':('name','username')}),
-      ('permissions',{'fields':('is_staff','is_active','is_superuser')})
+    (None, {'fields':('email',)}),
+      ('Personal Information',{'fields':('First_name','Last_name','username','birth')}),
+      ('permissions',{'fields':('is_staff','is_active','is_superuser','is_medical')})
     )
     
   add_fieldsets = (
     (None,{
       
       'classes':('wide',),
-      'fields':('email','username','name','password1','password2')
+      'fields':('email','First_name','Last_name','birth','username','is_medical','password1','password2')
       ,}
     ),)
   search_fields = ('email','username')
