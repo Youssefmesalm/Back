@@ -34,7 +34,7 @@ class User(AbstractBaseUser,PermissionsMixin):
   email = models.EmailField(unique=True)
   First_name = models.CharField(max_length=30,default='unknown')
   Last_name = models.CharField(max_length=30,default='user')
-  birth = models.DateField()
+  birth = models.DateField(null=True)
   age = models.IntegerField(default=0)
   created_at = models.DateField(auto_now_add=True,null=True)
   #job = models.CharField()
